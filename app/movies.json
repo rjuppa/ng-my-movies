@@ -1,0 +1,45 @@
+{
+    "movies": [
+    {
+        "name": "Circus Paradise",
+        "id": "jEgX64n3T7g",
+        "author": "Massive Attack",
+        "style":"Music",
+        "url": "https://www.youtube.com/watch?v=jEgX64n3T7g"
+    },
+    {
+        "name": "Big Calm",
+        "id": "qJQHjy9p_rk",
+        "author": "Morcheeba",
+        "style": "Music",
+        "url": "https://www.youtube.com/watch?v=qJQHjy9p_rk"
+    },
+    {
+        "name": "The Richest Man In Babylon",
+        "id": "oZKUTW5cucQ",
+        "author": "Thievery Corporation",
+        "style": "Music",
+        "url": "https://www.youtube.com/watch?v=oZKUTW5cucQ"
+    },
+    {
+        "name": "Lost in Amsterdam",
+        "id": "_n703YHjzOE",
+        "author": "Parov Stelar",
+        "style": "Music",
+        "url": "https://www.youtube.com/watch?v=_n703YHjzOE"
+    },
+    {
+        "name": "Ghost in the Shell",
+        "id": "OL5IxkHnQk4",
+        "author": "Mamoru Oshii",
+        "style": "Anime",
+        "url": "https://www.youtube.com/watch?v=OL5IxkHnQk4"
+    },
+    {
+        "name": "Homolka a tobolka",
+        "id": "6KXfZve2XOA",
+        "author": "Jaroslav Papoušek",
+        "style": "Komedie",
+        "url": "https://www.youtube.com/watch?v=6KXfZve2XOA"
+    }
+]}

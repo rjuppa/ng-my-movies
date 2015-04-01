@@ -1,0 +1,64 @@
+
+<div class="col-md-4 col-sm-5 col-sx-6">
+    <span class="h5">My movies list</span>&nbsp;
+    <button class="btn btn-success btn-sm">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </button>
+</div>
+
+<div class="col-md-8 col-sm-7 col-sx-6 text-left">
+    Search for <input type="text" ng-model="query" class="form-search" />
+    <input type="button" ng-click="" class="btn-search" value="Search" />
+</div>
+
+<div class="clearfix"></div>
+
+<div class="col-md-4 col-sm-5 col-sx-6">
+    <div class="leftside">
+        <div ng-repeat="movie in movies | filter:query">
+
+              <div ng-click="showDetails(movie)" class="divitem">
+                <h4>{{movie.name}}</h4>
+                <i class="dark">{{movie.style}}</i>
+              </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="col-md-8 col-sm-7 col-sx-6">
+
+    <div ng-hide="showMovie" class="text-center shift-down">
+        <h5>Select a movie from the list</h5>
+    </div>
+
+    <div ng-show="showMovie" class="pad10">
+
+            <iframe id="ytplayer" type="text/html" width="640" height="390"
+              src="{{ trustSrc(selectedMovie.id )}}" frameborder="0"/>
+
+        <div class="clearfix"></div>
+
+        <div style="width: 640px">
+            <form novalidate="">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" ng-model="selectedMovie.name" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Author</label>
+                    <input type="text" ng-model="selectedMovie.author" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>URL</label>
+                    <input type="text" ng-model="selectedMovie.url" class="form-control disabled" readonly />
+                </div>
+                <div class="form-group">
+                    <input type="submit" ng-click="update(selectedMovie)" value="Save" class="btn btn-md btn-success" />
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
