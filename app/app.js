@@ -4,6 +4,7 @@
 var myApp = angular.module('myApp', [
   'ngRoute',
   'ngSanitize',
+  'ngStorage',
   'MovieService',
   'myApp.movies',
   'myApp.about'

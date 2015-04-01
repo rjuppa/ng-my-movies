@@ -2,35 +2,9 @@
 
 var module_movies = angular.module('myApp.movies', ['ngRoute', 'ngSanitize', 'MovieService']);
 
-//module_movies.controller('MovieListCtrl',
-//    ['$scope', 'MovieService',
-//        function($scope, movieService) {
-//            $scope.movieId = '';
-//            $scope.bmovie = Boolean($scope.movieId);
-//            $scope.movies = [];
-//            loadRemoteData();
-//            $scope.showDetails = function(movie){
-//                $scope.selectedMovie = movie;
-//            };
-//
-//            function loadRemoteData() {
-//                // MovieService returns a promise.
-//                movieService.getMovies()
-//                    .then(
-//                        function( data ) {
-//                            $scope.movies = data['movies'];
-//                        }
-//                    )
-//                ;
-//            }
-//        }
-//    ]
-//);
-
-
 module_movies.controller('MovieDetailCtrl',
-    ['$scope', '$routeParams', '$sce', 'MovieService',
-    function($scope, $routeParams, $sce, movieService) {
+    ['$scope', '$routeParams', '$sce', '$localStorage', 'MovieService',
+    function($scope, $routeParams, $sce, $localStorage, movieService) {
         //$scope.movies = [];
         if( $routeParams.movieId ){
             $scope.movieId = $routeParams.movieId;
@@ -42,37 +16,74 @@ module_movies.controller('MovieDetailCtrl',
             $scope.selectedMovie = null;
             $scope.showMovie = false;
         }
-
+        $scope.$storage = $localStorage;
         $scope.showDetails = function(movie){
-                if(movie){
-                    $scope.selectedMovie = movie;
-                    $scope.movieId = movie.id;
-                    $scope.showMovie = Boolean($scope.selectedMovie);
-                }
+                showMovie(movie);
             };
         $scope.trustSrc = function(vid) {
                 return $sce.trustAsResourceUrl('http://www.youtube.com/embed/' + vid);
             };
 
-        if( !Boolean($scope.movies) )
-            loadRemoteData();
+        $scope.update = function(movie){
+            $scope.$storage.movies = $scope.movies;
+        };
 
-        function loadRemoteData() {
+        $scope.revert = function(movie){
+            var vid = movie.id.toString();
+            clearData();
+            loadRemoteData(
+                function(d){
+                    $scope.movies=d['movies'];
+                    var newMovie = getMovie(vid);
+                    showMovie(newMovie);
+                }
+            );
+        };
+
+        if( !$scope.movies ){
+            if( $scope.$storage.movies && $scope.$storage.movies.length>0 ){
+                $scope.movies = $scope.$storage.movies;
+            }
+            else{
+                loadRemoteData( function(d){$scope.movies=d['movies'];} );
+            }
+        }
+
+
+
+        //----------------------------------
+        function clearData() {
+            $scope.movies = [];
+            $scope.movieId = '';
+            $scope.selectedMovie = null;
+            $scope.showMovie = false;
+        }
+
+        function loadRemoteData(callback) {
             // MovieService returns a promise.
             movieService.getMovies()
-                .then(
-                    function( data ) {
-                        $scope.movies = data['movies'];
-                    }
+                .then(callback
+//                    function( data ) {
+//                        $scope.movies = data['movies'];
+//                    }
                 )
             ;
         }
 
+        function showMovie(movie){
+            if(movie){
+                $scope.selectedMovie = movie;
+                $scope.movieId = movie.id;
+                $scope.showMovie = Boolean($scope.selectedMovie);
+            }
+        }
+
         function getMovie(id) {
-            if( Boolean($scope.movies) ){
-                for(var m in $scope.movies){
-                    if( m.id === id ){
-                        return m;
+            if( $scope.movies ){
+                for(var i=0; i<$scope.movies.length; i++){
+                    var movie = $scope.movies[i];
+                    if( movie.id === id ){
+                        return movie;
                     }
                 }
             }
