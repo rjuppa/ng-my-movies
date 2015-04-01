@@ -1,9 +1,9 @@
 {
-  "name": "angular-seed",
+  "name": "ng-my-movies",
   "private": true,
   "version": "0.0.0",
-  "description": "A starter project for AngularJS",
-  "repository": "https://github.com/angular/angular-seed",
+  "description": "A sandbox for AngularJS",
+  "repository": "https://github.com/rjuppa/ng-my-movies",
   "license": "MIT",
   "devDependencies": {
     "karma": "^0.12.16",

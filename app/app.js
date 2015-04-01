@@ -6,7 +6,7 @@ var myApp = angular.module('myApp', [
   'ngSanitize',
   'MovieService',
   'myApp.movies',
-  'myApp.about',
+  'myApp.about'
 
 ]);
 

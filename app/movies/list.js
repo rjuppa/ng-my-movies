@@ -83,9 +83,8 @@ module_movies.controller('MovieDetailCtrl',
     }]);
 
 
-
-module_movies.service(
-    "MovieService",
+var module_movies_service = angular.module('MovieService', ['ngResource']);
+module_movies_service.service( "MovieService",
     function( $http, $q ) {
 
         // Return public API.

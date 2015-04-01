@@ -1,2 +1,2 @@
-# ng-my-video — testing project for AngularJS
+# ng-my-video — sandbox for AngularJS
 
