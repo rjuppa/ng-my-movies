@@ -1,2 +1,2 @@
-# ng-my-video — testing project for AngularJS apps
+# ng-my-video — testing project for AngularJS
 
