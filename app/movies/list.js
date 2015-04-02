@@ -10,12 +10,15 @@ module_movies.controller('MovieDetailCtrl',
             $scope.movieId = $routeParams.movieId;
             $scope.selectedMovie = getMovie($routeParams.movieId);
             $scope.showMovie = Boolean($scope.selectedMovie);
+            $scope.showNewMovie = false;
         }
         else{
             $scope.movieId = '';
             $scope.selectedMovie = null;
             $scope.showMovie = false;
+            $scope.showNewMovie = false;
         }
+
         $scope.$storage = $localStorage;
         $scope.showDetails = function(movie){
                 showMovie(movie);
@@ -38,6 +41,27 @@ module_movies.controller('MovieDetailCtrl',
                     showMovie(newMovie);
                 }
             );
+        };
+
+        $scope.addMovie = function(){
+            $scope.newMovie = {"name": "", "id": "", "author": "", "style": "Music","url": ""};
+            $scope.movieId = '';
+            $scope.selectedMovie = null;
+            $scope.showMovie = false;
+            $scope.showNewMovie = true;
+        };
+
+        $scope.addMovie_save = function(movie){
+            if( movie && movie.id && movie.name )
+            {
+                $scope.newMovie = movie;
+                $scope.movies.push(movie);
+                $scope.selectedMovie = movie;
+                $scope.movieId = movie.id;
+                $scope.showMovie = true;
+                $scope.showNewMovie = false;
+                $scope.$storage.movies = $scope.movies;
+            }
         };
 
         if( !$scope.movies ){
